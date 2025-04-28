@@ -1,0 +1,300 @@
+:root {
+    /* Light Mode Variables (Blue Breeze Theme) */
+    --background-color: #f4f8fc;
+    --text-color: #183153;
+    --card-background: #eaf2fb;
+    --border-color: #b2c7e6;
+    --navbar-bg: #d6e6fa;
+    --navbar-text: #183153;
+    --link-color: #2563eb;
+    --alert-bg: #e1effe;
+    --input-bg: #f8fbff;
+    --input-border: #60a5fa;
+}
+
+body.dark-mode {
+    /* Dark Mode Variables (Deep Blue Night) */
+    --background-color: #101c2c;
+    --text-color: #f1f6fb;
+    --card-background: #1a2940;
+    --border-color: #29457a;
+    --navbar-bg: #1a2940;
+    --navbar-text: #f1f6fb;
+    --link-color: #60a5fa;
+    --alert-bg: #16213a;
+    --input-bg: #223358;
+    --input-border: #60a5fa;
+}
+
+/* Typography */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Nunito Sans', 'Segoe UI', Arial, sans-serif;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', 'Nunito Sans', 'Segoe UI', sans-serif;
+    color: var(--text-color);
+    margin-bottom: 0.5em;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+/* Navbar, Footer, Card Header, Accordion */
+.navbar,
+.footer,
+.card-header,
+.accordion-button {
+    background-color: var(--navbar-bg) !important;
+    color: var(--navbar-text) !important;
+    box-shadow: 0 1px 8px rgba(36, 99, 235, 0.06);
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-background);
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(36, 99, 235, 0.07);
+    transition: box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 32px rgba(36, 99, 235, 0.13);
+}
+
+/* List Groups */
+.list-group-item {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    color: var(--text-color);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    background-color: var(--border-color);
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.table tbody tr {
+    background-color: var(--card-background);
+    transition: background 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: var(--alert-bg);
+}
+
+.table td,
+.table th {
+    padding: 0.9rem;
+    vertical-align: middle;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 7px;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, border 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--link-color);
+    border-color: var(--link-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #1e40af;
+    border-color: #1e40af;
+}
+
+.btn-success {
+    background-color: #38bdf8;
+    border-color: #38bdf8;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #0ea5e9;
+    border-color: #0ea5e9;
+}
+
+.btn-danger {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #1e3a8a;
+    border-color: #1e3a8a;
+}
+
+/* Alerts */
+.alert {
+    background-color: var(--alert-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+}
+
+/* Links */
+a,
+.nav-link {
+    color: var(--link-color);
+    transition: color 0.2s;
+}
+
+a:hover,
+.nav-link:hover {
+    text-decoration: underline;
+    color: #1e40af;
+}
+
+/* Form Controls */
+.form-control,
+.form-select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1.5px solid var(--input-border);
+    border-radius: 7px;
+    transition: border 0.2s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 2px rgba(36, 99, 235, 0.10);
+    border-color: var(--link-color);
+}
+
+.form-label {
+    font-weight: 700;
+}
+
+/* Nav Tabs */
+.nav-tabs .nav-link {
+    border: none;
+    color: var(--text-color);
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom: 3px solid var(--link-color);
+    color: var(--link-color);
+}
+
+/* Close Button */
+.btn-close {
+    font-size: 1.2em;
+    color: var(--text-color);
+    opacity: 0.55;
+}
+
+.btn-close:hover {
+    opacity: 0.8;
+}
+
+/* Accordion */
+.accordion-item {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    margin-bottom: 0.7rem;
+}
+
+.accordion-button {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--link-color);
+    background-color: var(--alert-bg);
+}
+
+.accordion-body {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+}
+
+/* ——————————————
+   Login/Register background
+   —————————————— */
+   .auth-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;      /* matches your .card width */
+    margin: 0 auto;
+    z-index: 2;            /* keep form on top */
+  }
+  
+  .auth-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;           /* 1.5× the form width (~750px on desktop) */
+    height: auto;          /* preserves square aspect */
+    transform: translate(-50%, -50%);
+    z-index: 1;            /* behind the form */
+    pointer-events: none;  /* clicks pass through */
+    user-select: none;
+    opacity: 0.2;          /* optional, soften the image */
+  }
+  
+  .auth-wrapper {
+    position: relative;
+    z-index: 2;            /* form above the bg */
+  }
+/* ——————————————————————
+   Full-screen login/register bg
+   —————————————————————— */
+   body.login-page {
+    margin: 0;  /* eliminate any default body padding */
+    background: url("/static/img/bg.png")
+                no-repeat center center fixed;
+    background-size: cover;
+  }
+  body.doctor-page {
+    margin: 0;
+    background: url("/static/img/doc.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+body.insurer-page {
+    margin: 0;
+    background: url("/static/img/ins.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+body.patient-page {
+    margin: 0;
+    background: url("/static/img/pat.png") no-repeat center center fixed;
+    background-size: cover;
+}
+    

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - MediChain</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <h2>Welcome, {{ name }}!</h2>
+        <h3>Role: {{ role.capitalize() }}</h3>
+      </div>
+
+      <!-- User Information -->
+      <div class="user-info">
+        <h4>Your Information:</h4>
+        <ul>
+          {% for key, value in user_info.items() %} {% if key != 'Medical
+          Events' %}
+          <li><strong>{{ key }}:</strong> {{ value }}</li>
+          {% endif %} {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Medical Events (for Patients) -->
+      {% if role == 'patient' and user_info['Medical Events'] %}
+      <div class="medical-events">
+        <h4>Your Medical Events (Audit Log):</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Actor</th>
+              <th>Action</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for event in user_info['Medical Events'] %}
+            <tr>
+              <td>{{ event['actor'] }}</td>
+              <td>{{ event['action'] }}</td>
+              <td>{{ event['timestamp'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% elif role == 'patient' %}
+      <p>No medical events found.</p>
+      {% endif %}
+
+      <!-- Transactions (Optional, if still relevant) -->
+      <!-- {% if transactions %}
+        <div class="transactions">
+            <h4>Your Transactions:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Value</th>
+                        <th>Settled</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for txn in transactions %}
+                        <tr>
+                            <td>{{ txn['Sender'] }}</td>
+                            <td>{{ txn['Receiver'] }}</td>
+                            <td>{{ txn['Value'] }}</td>
+                            <td>{{ 'Yes' if txn['Settled'] else 'No' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p>No transactions found.</p>
+        {% endif %} -->
+
+      <!-- Doctor Actions: Managing Patients -->
+      {% if role == 'doctor' %}
+      <h4>Doctor Actions:</h4>
+      {% if patients %}
+      <p>Select a patient to manage:</p>
+      <ul>
+        {% for patient in patients %}
+        <li>
+          <a
+            href="{{ url_for('update_medical_record_page', patient_address=patient['address']) }}"
+            class="btn"
+          >
+            Manage Medical Record for {{ patient['name'] }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No patients available for updating medical records.</p>
+      {% endif %} {% endif %}
+
+      <a href="{{ url_for('logout') }}" class="btn logout">Logout</a>
+    </div>
+  </body>
+</html>

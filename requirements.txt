@@ -1,0 +1,8 @@
+Flask
+Flask-Session
+flaskWebGUI
+web3
+py-solc-x
+python-dotenv
+requests
+

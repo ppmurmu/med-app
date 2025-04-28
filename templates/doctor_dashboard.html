@@ -1,0 +1,141 @@
+{% extends "base.html" %} {% block body_class %}doctor-page{% endblock %} {%
+block content %}
+<h2>Welcome, Dr. {{ name }}!</h2>
+<h5>Role: {{ role.capitalize() }}</h5>
+<hr />
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <h4>Your Information</h4>
+    <ul class="list-group">
+      {% for key, value in user_info.items() %}
+      <li class="list-group-item"><strong>{{ key }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<!-- Manage Patients Section -->
+<div class="row mb-4">
+  <div class="col-12">
+    <h4>Your Patients</h4>
+    {% if patients %}
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Ethereum Address</th>
+            <th>Medical Records</th>
+            <th>Actions</th>
+            <th>Transfer To…</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for patient in patients %}
+          <tr>
+            <td>{{ patient['name'] }}</td>
+            <td>{{ patient['address'] }}</td>
+            <td>
+              {% if patient['medicalRecords'] %}
+              <ul class="list-group">
+                {% for record in patient['medicalRecords'] %}
+                <li class="list-group-item">
+                  <a href="https://ipfs.io/ipfs/{{ record }}" target="_blank"
+                    >{{ record }}</a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+              {% else %}
+              <p>No medical records.</p>
+              {% endif %}
+            </td>
+            <td>
+              <a
+                href="{{ url_for('update_medical_record_page', patient_address=patient['address']) }}"
+                class="btn btn-primary btn-sm"
+                >Update Record</a
+              >
+            </td>
+            <td>
+              <form method="POST" action="{{ url_for('transfer_patient') }}">
+                <input
+                  type="hidden"
+                  name="patient_address"
+                  value="{{ patient['address'] }}"
+                />
+                <select
+                  name="new_doctor_address"
+                  class="form-select form-select-sm"
+                  required
+                >
+                  <option value="" disabled selected>Choose doctor</option>
+                  {% for doc in available_doctors %}
+                  <option value="{{ doc.address }}">{{ doc.name }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-warning btn-sm mt-1">
+                  Transfer
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p>You currently have no patients assigned.</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Pending Claims Section -->
+<div class="row mb-4">
+  <div class="col-12">
+    <h4>Pending Claims from Your Patients</h4>
+    {% if pending_claims %}
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead>
+          <tr>
+            <th>Claim ID</th>
+            <th>Patient</th>
+            <th>Record (IPFS)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in pending_claims %}
+          <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.patient }}</td>
+            <td>
+              <a href="https://ipfs.io/ipfs/{{ c.recordHash }}" target="_blank"
+                >{{ c.recordHash }}</a
+              >
+            </td>
+            <td>
+              <form
+                method="POST"
+                action="{{ url_for('doctor_approve_claim') }}"
+              >
+                <input type="hidden" name="claim_id" value="{{ c.id }}" />
+                <button type="submit" class="btn btn-success btn-sm">
+                  Approve
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p>No pending claims at the moment.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
